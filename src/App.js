@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.scss';
 import Background from './components/Background.js';
 import Tile from './components/BaseTile.js';
