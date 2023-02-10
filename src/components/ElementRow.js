@@ -34,14 +34,13 @@ const ElementRow = (props) => {
             return `rgba(70, 0, ${blue})`; 
         }else{
             let red = RangeScaler(val, min, max, 50, 255);
-            console.log(val)
             return `rgba(${red}, 0, 20)`; 
         }
     }
 
-    const listGen = valArray.map(x => <li key={props.element} className="tileContainer"><Tile color={getColor(x)} width="5.2%" className="elementRowTile"></Tile><div style={{color: getTextColor(x)}}>{Math.abs(x).toFixed(2)}</div></li>)
+    const listGen = valArray.map((x, ixx) => <li key={props.element + Math.random()} className="tileContainer"><Tile title={`Dredge Up ID: ${ixx} | ${props.element}`} color={getColor(x)} width="7.2%" className="elementRowTile"></Tile><div style={{color: getTextColor(x)}}></div></li>)//{Math.abs(x).toFixed(2)}
     return (
-        <ul className="tileRowContainer" style={{ position: 'absolute', width: "90.364583333%", height: "9.351851852%" }} id={props.id}><li className="tileContainer"><Tile width="5.2%" className="elementRowTile" color="#3500A6"></Tile>{props.element}</li>{listGen}</ul>
+        <ul className={`tileRowContainer`} style={{ position: 'absolute', width: "90.364583333%", height: "9.351851852%" }} id={props.id}><li className="tileContainer"><Tile width="7.2%" className="elementRowTile" color="#3500A6"></Tile>{props.element.toString().padEnd(2, '.')}</li>{listGen}</ul>
     )
 }
 
