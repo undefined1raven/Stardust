@@ -51,8 +51,8 @@ li {
   font-size: 2.2vh;
   text-decoration: none;
   list-style: none;
-  padding-right: 1%;
-  padding-left: 1%;
+  padding-right: 3%;
+  padding-left: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,13 +110,33 @@ li {
 //   }
 // }
 .displayListElement {
-  padding-top: 1%;
-  padding-bottom: 1%;
+  padding-top: 3%;
+  padding-bottom: 3%;
   list-style: none;
 }
 
 @media only screen and (max-width: 600px) {
   .tileContainer {
     font-size: 0.9vh;
+    padding-right: 1%;
+    padding-left: 1%;
+  }
+
+  .displayListElement {
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+}
+@media only screen and (max-height: 500px) {
+  .tileContainer {
+    font-size: 0.9vh;
+    padding-right: 0.9%;
+    padding-left: 0.9%;
+  }
+
+  .displayListElement {
+    padding-top: 2%;
+    padding-bottom: 2%;
   }
 }
