@@ -6777,6 +6777,12 @@ function App() {
     if (e.target.value.split(':')[0] == 'M') {
       setParams({ ...params, mass: e.target.value.split(':')[1] });
     }
+    if (e.target.value.split(':')[0] == 'X') {
+      setParams({ ...params, metallicity: e.target.value.split(':')[1] });
+    }
+    if (e.target.value.split(':')[0] == 'I') {
+      setParams({ ...params, irv: e.target.value.split(':')[1] });
+    }
   }
   useEffect(() => {
     setListGen(genListActual(params));
@@ -6792,6 +6798,21 @@ function App() {
         <option className='selectorOption' value="M:2.00">2.00</option>
         <option className='selectorOption' value="M:6.00">6.00</option>
         <option className='selectorOption' value="M:65.00">65.00</option>
+      </select>
+      <select className='selector' name='metallicity' onChange={onParamsChange} value={`X:${params.metallicity}`} id='metallicity'>
+        <option className='selectorOption' value="X:000020">0.000020</option>
+        <option className='selectorOption' value="X:000050">0.000050</option>
+        <option className='selectorOption' value="X:000100">0.000100</option>
+      </select>
+      <select className='selector' name='irv' onChange={onParamsChange} value={`I:${params.irv}`} id='irv'>
+        <option className='selectorOption' value="I:00">0</option>
+        <option className='selectorOption' value="I:10">10</option>
+        <option className='selectorOption' value="I:30">30</option>
+        <option className='selectorOption' value="I:60">60</option>
+      </select>
+      <select className='selector' name='carbon' onChange={onParamsChange} value={`C:${params.carbon}`} id='carbon'>
+        <option className='selectorOption' value="C:Standard">Standard</option>
+        <option className='selectorOption' value="C:Extended">Extended</option>
       </select>
       <ul className='primaryContainer'>
         {listGen}

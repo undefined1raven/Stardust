@@ -131,7 +131,7 @@ li {
 }
 
 .selector {
-  background-color: #7000FF50;
+  background-color: #43009baa;
   color: #FFF;
   outline: 0;
   border: solid 1px #7000FF;
@@ -143,10 +143,27 @@ li {
   @include absolute(5%, 50%);
 }
 
-.selectorOption {
+#metallicity {
+  @include absolute(5%, 40%);
+}
+
+#irv {
+  @include absolute(5%, 30%);
+}
+#carbon{
+  @include absolute(5%, 20%);
+}
+.selectorOption::selection{
   background-color: #7000FF;
+}
+.selectorOption:focus{
+  background-color: #7000FF;
+}
+
+.selectorOption {
+  background-color: #4d00b3;
   color: #FFF;
-  border: solid 1px #7000FF;
+  border: solid 1px #4d00b3;
 }
 
 @media only screen and (max-width: 600px) {
@@ -155,9 +172,22 @@ li {
     padding-right: 1%;
     padding-left: 1%;
   }
+  #massSelector {
+    @include absolute(0%, 60.8%);
+  }
+  #metallicity {
+    @include absolute(0%, 40.4%);
+  }
+  #carbon{
+    @include absolute(0%, 0%);
+  }
+  #irv {
+    @include absolute(0%, 20.2%);
+  }
 
   .selector {
     width: 20%;
+    height: 5%;
   }
 
   .primaryContainer {
