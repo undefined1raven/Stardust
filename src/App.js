@@ -6765,7 +6765,7 @@ function App() {
   }
   const genListActual = (params) => {
     try {
-      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' key={elementsActual[ix] + Math.random()} ><ElementRow element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
+      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' key={elementsActual[ix] + Math.random()} ><ElementRow mode="absolute" element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
     }
     catch (e) {
       return undefined;
@@ -6783,6 +6783,9 @@ function App() {
     if (e.target.value.split(':')[0] == 'I') {
       setParams({ ...params, irv: e.target.value.split(':')[1] });
     }
+    if (e.target.value.split(':')[0] == 'C') {
+      setParams({ ...params, carbon: e.target.value.split(':')[1] });
+    }
   }
   useEffect(() => {
     setListGen(genListActual(params));
@@ -6793,6 +6796,11 @@ function App() {
       <div id='bkg'></div>
       {/* <Background></Background> */}
       <div id='l'>[El/Fe] = log10(El/Fe)« - log10(El/Fe)¤</div>
+      <div id='title'>Full-Network Repository of Updated Isotopic Tables & Yields</div>
+      <div className='selectorLabel' id='massLabel'>Mass(M¤)</div>
+      <div className='selectorLabel' id='metallicityLabel'>Metallicity(Z)</div>
+      <div className='selectorLabel' id='irvLabel'>IRV(km/s)</div>
+      <div className='selectorLabel' id='carbonLabel'>C[13] Pocket</div>
       <select className='selector' name='mass' onChange={onParamsChange} value={`M:${params.mass}`} id='massSelector'>
         <option className='selectorOption' value="M:1.50">1.50</option>
         <option className='selectorOption' value="M:2.00">2.00</option>

@@ -9,7 +9,11 @@ body {
   top: $x;
   left: $y;
 }
-
+@mixin flex() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @mixin size($x, $y) {
   position: absolute;
   height: $x;
@@ -41,14 +45,27 @@ li {
 }
 
 #l {
-  @include absolute(15%, 10%);
+  @include absolute(11%, 0.2%);
   color: #FFF;
+  font-size: 1.3vh;
+  z-index: 150;
+}
+
+.selectorLabel {
+  color: #FFF;
+  font-size: 2vh;
+}
+
+#title {
+  @include absolute(0.5%, 50%);
+  transform: translate(-50%);
+  color: #AAA;
   font-size: 2vh;
 }
 
 .tileContainer {
   color: #FFF;
-  font-size: 2.2vh;
+  font-size: 1.2vh;
   text-decoration: none;
   list-style: none;
   padding-right: 3%;
@@ -78,13 +95,14 @@ li {
 
 
 .primaryContainer {
-  @include absolute(10%, 0%);
+  @include absolute(12.87037037%, 0%);
   width: 100%;
-  height: 90%;
+  height: 87%;
   overflow: scroll;
-  border-right: solid 1px #7000FF;
+  border-top: solid 1px #7000FF;
   margin: 0;
   padding: 0;
+  background-color: #7000FF20;
 }
 
 .primaryContainer::-webkit-scrollbar {
@@ -112,14 +130,14 @@ li {
 //   }
 // }
 .displayListElement {
-  padding-top: 0.1%;
-  padding-bottom: 0.1%;
+  padding-top: 0.2%;
+  padding-bottom: 0.2%;
   list-style: none;
 }
 
 .waterfallTile {
   width: 115%;
-  height: 50%;
+  height: 30%;
 }
 
 #bkgImg {
@@ -136,27 +154,48 @@ li {
   outline: 0;
   border: solid 1px #7000FF;
   z-index: 100;
-  width: 10%;
+  width: 15.572916667%;
+  height: 3.703703704%;
+  font-size: 1.9vh;
 }
 
 #massSelector {
-  @include absolute(5%, 50%);
+  @include absolute(7.407407407%, 15.78125%);
 }
 
 #metallicity {
-  @include absolute(5%, 40%);
+  @include absolute(7.407407407%, 33.385416667%);
 }
 
 #irv {
-  @include absolute(5%, 30%);
+  @include absolute(7.407407407%, 50.989583333%);
 }
-#carbon{
-  @include absolute(5%, 20%);
+
+#carbon {
+  @include absolute(7.407407407%, 68.59375%);
 }
-.selectorOption::selection{
+
+#massLabel {
+  @include absolute(5%, 15.78125%);
+}
+
+#metallicityLabel {
+  @include absolute(5%, 33.385416667%);
+}
+
+#irvLabel {
+  @include absolute(5%, 50.989583333%);
+}
+
+#carbonLabel {
+  @include absolute(5%, 68.59375%);
+}
+
+.selectorOption::selection {
   background-color: #7000FF;
 }
-.selectorOption:focus{
+
+.selectorOption:focus {
   background-color: #7000FF;
 }
 
@@ -167,22 +206,65 @@ li {
 }
 
 @media only screen and (max-width: 600px) {
+  #title {
+    @include absolute(0%, 50%);
+    @include flex();
+    width: 100%;
+    height: 3.90625%;
+    font-size: 1.6vh;
+    white-space: nowrap;
+    background-color: #4d00b350;
+    border-bottom: solid 1px #4d00b3;
+    color: #FFF;
+  }
+  .selectorLabel{
+    font-size: 1.7vh;
+    top: 4.375% !important;
+  }
+  #massLabel{
+    @include absolute(4.375%, 1.111111111%);
+  }
+  #metallicityLabel{
+    @include absolute(4.375%, 26.111111111%);
+  }
+  #irvLabel{
+    @include absolute(4.375%, 51.111111111%);
+  }
+  #carbonLabel{
+    @include absolute(4.375%, 76.111111111%);
+  }
   .tileContainer {
     font-size: 1.4vh;
     padding-right: 1%;
     padding-left: 1%;
   }
+
   #massSelector {
-    @include absolute(0%, 60.8%);
+    @include absolute(6.875%, 1.111111111%);
+    @include size(3.90625%, 22.916666667%);
+  
   }
+
   #metallicity {
-    @include absolute(0%, 40.4%);
+    @include absolute(6.875%, 26.111111111%);
+    @include size(3.90625%, 22.916666667%);
+  
   }
-  #carbon{
-    @include absolute(0%, 0%);
+
+  #carbon {
+    @include absolute(6.875%, 76.111111111%);
+    @include size(3.90625%, 22.916666667%);
+    
   }
+
   #irv {
-    @include absolute(0%, 20.2%);
+    @include absolute(6.875%, 51.111111111%);
+    @include size(3.90625%, 22.916666667%);
+  }
+
+  .waterfallTile {
+    width: 23%;
+    height: 20%;
   }
 
   .selector {
@@ -191,8 +273,9 @@ li {
   }
 
   .primaryContainer {
-    top: -3%;
-    height: 104%;
+    top: 18.4375%;
+    height: 81.5625%;
+    background-color: #00000080;
   }
 
   .displayListElement {
