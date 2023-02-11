@@ -5,13 +5,13 @@ import Tile from './components/BaseTile.js';
 import ElementRow from './components/ElementRow.js';
 import ReactPaginate from 'react-paginate';
 
-import Alpha_000020 from  './data/Alpha_000020.json'
-import Alpha_000050 from  './data/Alpha_000050.json'
-import Alpha_000100 from  './data/Alpha_000100.json'
+import Alpha_000020 from './data/Alpha_000020.json'
+import Alpha_000050 from './data/Alpha_000050.json'
+import Alpha_000100 from './data/Alpha_000100.json'
 // console.log(Alpha_000020['M:1.30']['IRV:00']['CS'])
 let len = 83
-let ins = 
-`
+let ins =
+  `
 C
 6
 -1.87e-01
@@ -6733,14 +6733,14 @@ const elementsActual = ['C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', '
 
 
 let xx = []
-function parseDataString(dataLen, str){
+function parseDataString(dataLen, str) {
   let sar = str.split('\n');
   let outArray = []
-  for(let ix = 0; ix < sar.length; ix++){
-    if(sar[ix].length >= 1 && sar[ix].length <= 2 && elementsActual.indexOf(sar[ix]) != -1){
+  for (let ix = 0; ix < sar.length; ix++) {
+    if (sar[ix].length >= 1 && sar[ix].length <= 2 && elementsActual.indexOf(sar[ix]) != -1) {
       xx.push(sar[ix])
       let tempArray = [];
-      for(let inx = 0; inx < dataLen; inx++){
+      for (let inx = 0; inx < dataLen; inx++) {
         tempArray.push(sar[ix + 2 + inx])
       }
       outArray.push(tempArray)
@@ -6751,21 +6751,50 @@ function parseDataString(dataLen, str){
 
 
 
-parseDataString(len, ins);
+// parseDataString(len, ins);
 
 function App() {
+  const dataSetFromMetallicity = (metallicity) => {
+    if (metallicity == '000100') {
+      return Alpha_000100;
+    } else if (metallicity == '000050') {
+      return Alpha_000050;
+    } else if (metallicity == '000020') {
+      return Alpha_000020;
+    }
+  }
+  const genListActual = (params) => {
+    try {
+      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' key={elementsActual[ix] + Math.random()} ><ElementRow element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
+    }
+    catch (e) {
+      return undefined;
+    }
+  }
+  const [params, setParams] = useState({ mass: '1.50', metallicity: '000100', irv: '00', carbon: 'Standard' })
+  const [listGen, setListGen] = useState(genListActual(params));
+  const onParamsChange = (e) => {
+    if (e.target.value.split(':')[0] == 'M') {
+      setParams({ ...params, mass: e.target.value.split(':')[1] });
+    }
+  }
+  useEffect(() => {
+    setListGen(genListActual(params));
+  }, [params])
 
-  const [params, setParams] = useState({params: {mass: '6.00', metallicity: '000100', irv: '00', carbon: 'Standard'}})
-  const [listGen, setListGen] = useState({params: params, listGen: Alpha_000100[`${params.params.mass}|${params.params.metallicity}|${params.params.irv}|${params.params.carbon}`].map((x, ix) => <li className='displayListElement' key={elementsActual[ix] + Math.random()} ><ElementRow element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)})
-  
   return (
     <div className="bkg">
       <div id='bkg'></div>
       {/* <Background></Background> */}
       <div id='l'>[El/Fe] = log10(El/Fe)« - log10(El/Fe)¤</div>
-
+      <select className='selector' name='mass' onChange={onParamsChange} value={`M:${params.mass}`} id='massSelector'>
+        <option className='selectorOption' value="M:1.50">1.50</option>
+        <option className='selectorOption' value="M:2.00">2.00</option>
+        <option className='selectorOption' value="M:6.00">6.00</option>
+        <option className='selectorOption' value="M:65.00">65.00</option>
+      </select>
       <ul className='primaryContainer'>
-        {listGen.listGen}
+        {listGen}
       </ul>
     </div>
   );

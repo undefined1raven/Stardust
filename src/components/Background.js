@@ -1,10 +1,10 @@
 import * as React from "react";
-import bkg from "../images/bkg.svg"
+import bkg from "../images/Cosmic_Microwave_Background_CMB.jpg"
 
 
 const Background = () => {
     return(
-        <img id="" src={bkg}></img>
+        <img id="bkgImg" src={bkg}></img>
     )
 }
 
