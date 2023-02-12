@@ -237,6 +237,11 @@ function App() {
       </ul>
       <div id='noDataLabel' style={{ opacity: noDataLabelOpacity }}>__NO DATA__</div>
       <About onBackClick={onBackClick} about={about}></About>
+      <div id='dkElementIndi' style={{opacity: showValues ? '0' : '1'}}>
+        <div id='cLabel'>C</div>
+        <div id='biLabel'>Bi</div>
+        <div id='dkElementIndiLine'></div>
+      </div>
     </div>
   );
 }

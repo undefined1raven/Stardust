@@ -4,7 +4,7 @@ const paintingModeSelector = (props) => {
     const onClick = () => props.onClick();
     const styleController = (btnId) => {
         const active = {color: '#FFF', backgroundColor: '#6100FF50', border: 'solid 1px #6100FF'};
-        const inactive = {color: '#4C00C7', backgroundColor: '#39009630', border: 'solid 1px #390096'};
+        const inactive = {color: '#7000FF', backgroundColor: '#39009650', border: 'solid 1px #390096'};
         if(props.mode == 'absolute'){
             return {abs: active, rel: inactive};
         }else if(props.mode == 'relative'){

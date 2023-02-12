@@ -47,8 +47,8 @@ li {
 }
 
 #l {
-  @include absolute(11%, 0.2%);
-  color: #FFF;
+  @include absolute(0.5%, 2.1%);
+  color: #999;
   font-size: 1.3vh;
   z-index: 2;
 }
@@ -207,25 +207,43 @@ li {
 }
 
 #massLabel {
-  @include absolute(5%, 15.78125%);
+  @include absolute(4.5%, 15.78125%);
 }
 
 #metallicityLabel {
-  @include absolute(5%, 33.385416667%);
+  @include absolute(4.5%, 33.385416667%);
 }
 
 #irvLabel {
-  @include absolute(5%, 50.989583333%);
+  @include absolute(4.5%, 50.989583333%);
 }
 
 #carbonLabel {
-  @include absolute(5%, 68.59375%);
+  @include absolute(4.5%, 68.59375%);
 }
-
+#dkElementIndi{
+  @include flex();
+  @include absolute(15.5%, -0.1%);
+  @include size(31.4%, 6%);
+}
 #paintingModeLabel {
-  @include absolute(5%, 2.135416667%);
+  @include absolute(4.5%, 2.135416667%);
 }
-
+#dkElementIndiLine{
+  @include absolute(9.5%, 50%);
+  @include size(80%, 0.1vh);
+  background-color: #7000FF;
+}
+#cLabel, #biLabel{
+  @include absolute(0%, 0%);
+  @include size(10%, 100%);
+  @include flex();
+  font-size: 2vh;
+  color: #7000FF;
+}
+#biLabel{
+  @include absolute(90%, 0%);
+} 
 .selectorOption::selection {
   background-color: #7000FF;
 }
@@ -455,6 +473,9 @@ li {
 }
 
 @media only screen and (max-width: 600px) {
+  #dkElementIndi{
+    display: none;
+  }
   .primaryContainer::-webkit-scrollbar {
     height: 0.4vh;
   }
