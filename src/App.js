@@ -4,6 +4,7 @@ import Background from './components/Background.js';
 import Tile from './components/BaseTile.js';
 import ElementRow from './components/ElementRow.js';
 import PaintingModeSelector from './components/paintingModeSelector.js';
+import About from './components/About.js';
 
 import Alpha_000020 from './data/Alpha_000020.json'
 import Alpha_000050 from './data/Alpha_000050.json'
@@ -133,15 +134,15 @@ function App() {
     }
   }
   const DLE_StyleOps = () => {
-    if(showValues){
-      return {paddingTop: '1%', paddingBottom: '1%'};
-    }else{
-      return {paddingTop: '0.1%', paddingBottom: '0.1%'};
+    if (showValues) {
+      return { paddingTop: '1%', paddingBottom: '1%' };
+    } else {
+      return { paddingTop: '0.1%', paddingBottom: '0.1%' };
     }
   }
   const genListActual = (params) => {
     try {
-      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' style={{paddingTop: DLE_StyleOps().paddingTop, paddingBottom: DLE_StyleOps().paddingBottom}} key={elementsActual[ix] + Math.random()} ><ElementRow showValues={showValues} mode={dataPaintingMode} element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
+      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' style={{ paddingTop: DLE_StyleOps().paddingTop, paddingBottom: DLE_StyleOps().paddingBottom }} key={elementsActual[ix] + Math.random()} ><ElementRow showValues={showValues} mode={dataPaintingMode} element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
     }
     catch (e) {
       return undefined;
@@ -152,11 +153,12 @@ function App() {
   const [dataPaintingMode, setDataPaintingMode] = useState('relative');
   const [noDataLabelOpacity, setNoDataLabelOpacity] = useState('0');
   const [showValues, setShowValues] = useState(false);
+  const [about, setAbout] = useState(false);
 
   const onDataPaintingModeToggle = () => {
-    if(dataPaintingMode == 'relative'){
+    if (dataPaintingMode == 'relative') {
       setDataPaintingMode('absolute');
-    }else{
+    } else {
       setDataPaintingMode('relative');
     }
   }
@@ -175,19 +177,20 @@ function App() {
     }
   }
   const toggleShowValues = () => {
-    if(showValues){
-      setShowValues(false);
-    }else{
-      setShowValues(true);
-    }
-    console.log(showValues)
+    showValues ? setShowValues(false) : setShowValues(true);
+  }
+  const toggleAbout = () => {
+    about ? setAbout(false) : setAbout(true);
+  }
+  const onBackClick = () => {
+    setAbout(false);
   }
   useEffect(() => {
     setListGen(genListActual(params));
     setTimeout(() => {
-      if(document.getElementsByClassName('primaryContainer')[0].childNodes.length == 1){
+      if (document.getElementsByClassName('primaryContainer')[0].childNodes.length == 1) {
         setNoDataLabelOpacity(1);
-      }else{
+      } else {
         setNoDataLabelOpacity(0);
       }
     }, 50);
@@ -206,7 +209,7 @@ function App() {
       <div className='selectorLabel noSelect' id='paintingModeLabel'>Data Painting Mode</div>
       <PaintingModeSelector onClick={onDataPaintingModeToggle} mode={dataPaintingMode}></PaintingModeSelector>
       <div onClick={toggleShowValues} className='button' id='toggleValuesButton'>{showValues ? 'Hide Values' : 'Show Values'}</div>
-      <div className='button' id='aboutButton'>About</div>
+      <div onClick={toggleAbout} className='button' id='aboutButton'>About</div>
       <select className='selector noSelect' name='mass' onChange={onParamsChange} value={`M:${params.mass}`} id='massSelector'>
         <option className='selectorOption noSelect' value="M:1.50">1.50</option>
         <option className='selectorOption noSelect' value="M:2.00">2.00</option>
@@ -214,9 +217,9 @@ function App() {
         <option className='selectorOption noSelect' value="M:65.00">65.00</option>
       </select>
       <select className='selector noSelect' name='metallicity' onChange={onParamsChange} value={`X:${params.metallicity}`} id='metallicity'>
-        <option className='selectorOption noSelect' value="X:000020">0.000020</option>
-        <option className='selectorOption noSelect' value="X:000050">0.000050</option>
-        <option className='selectorOption noSelect' value="X:000100">0.000100</option>
+        <option className='selectorOption noSelect' value="X:000020">0.000020 [α/Fe]=0.5</option>
+        <option className='selectorOption noSelect' value="X:000050">0.000050 [α/Fe]=0.5</option>
+        <option className='selectorOption noSelect' value="X:000100">0.000100 [α/Fe]=0.5</option>
       </select>
       <select className='selector noSelect' name='irv' onChange={onParamsChange} value={`I:${params.irv}`} id='irv'>
         <option className='selectorOption noSelect' value="I:00">0</option>
@@ -229,10 +232,11 @@ function App() {
         <option className='selectorOption noSelect' value="C:Extended">Extended</option>
       </select>
       <ul className='primaryContainer'>
-        <li className='ee' style={{opacity: 1 - noDataLabelOpacity}}>me hoping you still like purp :]</li>
+        <li className='ee' style={{ opacity: 1 - noDataLabelOpacity }}>me hoping you still like purp :]</li>
         {listGen}
       </ul>
-      <div id='noDataLabel' style={{opacity: noDataLabelOpacity}}>__NO DATA__</div>
+      <div id='noDataLabel' style={{ opacity: noDataLabelOpacity }}>__NO DATA__</div>
+      <About onBackClick={onBackClick} about={about}></About>
     </div>
   );
 }

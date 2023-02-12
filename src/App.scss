@@ -309,7 +309,96 @@ li {
     font-size: 2.1vh;
     background-color: #F0005620;
   }
-
+  .aboutContainer{
+    @include absolute(0%, 0%);
+    @include size(100%, 100%);
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(1px);
+    z-index: 150;
+  }
+  #gitlink{
+    color: #a35dff;
+  }
+  .backButton:hover{
+    background-color: #39009680;
+  }
+  .linkContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    border-bottom: solid 1px #7000FF;
+    @include size(19%, 90%);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  #projectLabel{
+    @include absolute(1%, 0%);
+    @include flex();
+    @include size(2%, 100%);
+    color: #a35dff;
+  }
+  .link{
+    color: #CCC;
+    text-decoration: none;
+  }
+  @for $ix from 1 through 11 {
+  .x#{$ix}{
+    top: calc(-24% + (20% * $ix));
+  }
+}
+  #linksList{
+    @include absolute(34%, 0%);
+    @include size(53%, 90%);
+    margin: 0;
+    padding: 0;
+    padding-right: 5%;
+    padding-left: 5%;
+    overflow-y: scroll
+  }
+  #linksLabel{
+    @include absolute(30%, 0%);
+    color: #FFF;
+    font-size: 2.4vh;
+    padding-left: 5%;
+  }
+  #desc{
+    @include absolute(11.25%, 0%);
+    @include size(15.625%, 90%);
+    @include flex();
+    color: #FFF;
+    font-size: 1.9vh;
+    padding-right: 5%;
+    padding-left: 5%;
+    border-bottom: solid 1px #7000FF; 
+  }
+  #atfo{
+    @include absolute(87.65625%, 0%);
+    @include size(6.71875%, 100%);
+    @include flex();
+    background-color: #39009600;
+    color: #a35dff;
+    font-size: 2.2vh;
+    border-top: solid 1px #7000FF; 
+  }
+  #aboutLabel{
+    @include absolute(0%, 0%);
+    @include size(9.625%, 100%);
+    @include flex();
+    padding-top: 4%;
+    background-color: #39009680;
+    color: #FFF;
+    font-size: 2.7vh;
+  }
+  .backButton{
+    @include absolute(94.53125%, 0%);
+    @include size(5.46875%, 100%);
+    @include flex();
+    color: #AAA;
+    background-color: #39009650;
+    font-size: 2.3vh;
+  }
   .ee {
     margin: 0;
     padding: 0;
