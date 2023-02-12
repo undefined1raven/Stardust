@@ -455,6 +455,9 @@ li {
 }
 
 @media only screen and (max-width: 600px) {
+  .primaryContainer::-webkit-scrollbar {
+    height: 0.4vh;
+  }
   #desc {
     @include absolute(11.25%, 0%);
     padding-top: 0%;
