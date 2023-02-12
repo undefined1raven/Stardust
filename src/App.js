@@ -143,6 +143,7 @@ function App() {
   const [params, setParams] = useState({ mass: '1.50', metallicity: '000100', irv: '00', carbon: 'Standard' })
   const [listGen, setListGen] = useState(genListActual(params));
   const [dataPaintingMode, setDataPaintingMode] = useState('relative');
+  const [noDataLabelOpacity, setNoDataLabelOpacity] = useState('0');
   const onDataPaintingModeToggle = () => {
     if(dataPaintingMode == 'relative'){
       setDataPaintingMode('absolute');
@@ -166,6 +167,13 @@ function App() {
   }
   useEffect(() => {
     setListGen(genListActual(params));
+    setTimeout(() => {
+      if(document.getElementsByClassName('primaryContainer')[0].childNodes.length == 1){
+        setNoDataLabelOpacity(1);
+      }else{
+        setNoDataLabelOpacity(0);
+      }
+    }, 50);
   }, [params, dataPaintingMode])
 
   return (
@@ -202,8 +210,10 @@ function App() {
         <option className='selectorOption noSelect' value="C:Extended">Extended</option>
       </select>
       <ul className='primaryContainer'>
+        <li className='ee' style={{opacity: 1 - noDataLabelOpacity}}>me hoping you still like purp :]</li>
         {listGen}
       </ul>
+      <div id='noDataLabel' style={{opacity: noDataLabelOpacity}}>__NO DATA__</div>
     </div>
   );
 }
