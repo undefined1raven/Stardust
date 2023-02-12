@@ -132,9 +132,16 @@ function App() {
       return Alpha_000020;
     }
   }
+  const DLE_StyleOps = () => {
+    if(showValues){
+      return {paddingTop: '1%', paddingBottom: '1%'};
+    }else{
+      return {paddingTop: '0.1%', paddingBottom: '0.1%'};
+    }
+  }
   const genListActual = (params) => {
     try {
-      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' key={elementsActual[ix] + Math.random()} ><ElementRow mode={dataPaintingMode} element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
+      return dataSetFromMetallicity(params.metallicity)[`${params.mass}|${params.metallicity}|${params.irv}|${params.carbon}`].map((x, ix) => <li className='displayListElement' style={{paddingTop: DLE_StyleOps().paddingTop, paddingBottom: DLE_StyleOps().paddingBottom}} key={elementsActual[ix] + Math.random()} ><ElementRow showValues={showValues} mode={dataPaintingMode} element={elementsActual[ix]} ix={ix} data={x} width="7.2%" className="elementRowTile"></ElementRow></li>)
     }
     catch (e) {
       return undefined;
@@ -144,6 +151,8 @@ function App() {
   const [listGen, setListGen] = useState(genListActual(params));
   const [dataPaintingMode, setDataPaintingMode] = useState('relative');
   const [noDataLabelOpacity, setNoDataLabelOpacity] = useState('0');
+  const [showValues, setShowValues] = useState(false);
+
   const onDataPaintingModeToggle = () => {
     if(dataPaintingMode == 'relative'){
       setDataPaintingMode('absolute');
@@ -165,6 +174,14 @@ function App() {
       setParams({ ...params, carbon: e.target.value.split(':')[1] });
     }
   }
+  const toggleShowValues = () => {
+    if(showValues){
+      setShowValues(false);
+    }else{
+      setShowValues(true);
+    }
+    console.log(showValues)
+  }
   useEffect(() => {
     setListGen(genListActual(params));
     setTimeout(() => {
@@ -174,7 +191,7 @@ function App() {
         setNoDataLabelOpacity(0);
       }
     }, 50);
-  }, [params, dataPaintingMode])
+  }, [params, dataPaintingMode, showValues])
 
   return (
     <div className="bkg">
@@ -188,6 +205,8 @@ function App() {
       <div className='selectorLabel noSelect' id='carbonLabel'>C[13] Pocket</div>
       <div className='selectorLabel noSelect' id='paintingModeLabel'>Data Painting Mode</div>
       <PaintingModeSelector onClick={onDataPaintingModeToggle} mode={dataPaintingMode}></PaintingModeSelector>
+      <div onClick={toggleShowValues} className='button' id='toggleValuesButton'>{showValues ? 'Hide Values' : 'Show Values'}</div>
+      <div className='button' id='aboutButton'>About</div>
       <select className='selector noSelect' name='mass' onChange={onParamsChange} value={`M:${params.mass}`} id='massSelector'>
         <option className='selectorOption noSelect' value="M:1.50">1.50</option>
         <option className='selectorOption noSelect' value="M:2.00">2.00</option>
