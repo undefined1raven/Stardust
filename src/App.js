@@ -9,94 +9,18 @@ import About from './components/About.js';
 import Alpha_000020 from './data/Alpha_000020.json'
 import Alpha_000050 from './data/Alpha_000050.json'
 import Alpha_000100 from './data/Alpha_000100.json'
-// console.log(Alpha_000020['M:1.30']['IRV:00']['CS'])
-let len = 83
+import Alpha_000300 from './data/Alpha_000300.json'
+import Alpha_001000 from './data/Alpha_001000.json'
+import Alpha_002000 from './data/Alpha_002000.json'
+import Alpha_003000 from './data/Alpha_003000.json'
+import Alpha_006000 from './data/Alpha_006000.json'
+
+let len = 23
 let ins =
-  `
 `
 
 
-
-// const elementsActual = [
-//   "C",
-//   "N",
-//   "O",
-//   "F",
-//   "Ne",
-//   "Na",
-//   "Mg",
-//   "Al",
-//   "Si",
-//   "P",
-//   "S3",
-//   "Cl",
-//   "Ar",
-//   "K4",
-//   "Ca",
-//   "Sc",
-//   "Ti",
-//   "V5",
-//   "Cr",
-//   "Mn",
-//   "Fe",
-//   "Co",
-//   "Ni",
-//   "Cu",
-//   "Zn",
-//   "Ga",
-//   "Ge",
-//   "As",
-//   "Se",
-//   "Br",
-//   "Kr",
-//   "Rb",
-//   "Sr",
-//   "Y9",
-//   "Zr",
-//   "Nb",
-//   "Mo",
-//   "Tc",
-//   "Ru",
-//   "Rh",
-//   "Pd",
-//   "Ag",
-//   "Cd",
-//   "In",
-//   "Sn",
-//   "Sb",
-//   "Te",
-//   "I1",
-//   "Xe",
-//   "Cs",
-//   "Ba",
-//   "La",
-//   "Ce",
-//   "Pr",
-//   "Nd",
-//   "Pm",
-//   "Sm",
-//   "Eu",
-//   "Gd",
-//   "Tb",
-//   "Dy",
-//   "Ho",
-//   "Er",
-//   "Tm",
-//   "Yb",
-//   "Lu",
-//   "Hf",
-//   "Ta",
-//   "W1",
-//   "Re",
-//   "Os",
-//   "Ir",
-//   "Pt",
-//   "Au",
-//   "Hg",
-//   "Tl",
-//   "Pb",
-//   "Bi"
-// ]
+`
 
 const elementsActual = ['C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'I', 'Te', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi'];
 
@@ -121,7 +45,7 @@ function parseDataString(dataLen, str) {
 
 
 
-// parseDataString(len, ins);
+parseDataString(len, ins);
 
 function App() {
   const dataSetFromMetallicity = (metallicity) => {
@@ -131,6 +55,16 @@ function App() {
       return Alpha_000050;
     } else if (metallicity == '000020') {
       return Alpha_000020;
+    } else if (metallicity == '000300') {
+      return Alpha_000300;
+    } else if (metallicity == '001000') {
+      return Alpha_001000;
+    } else if (metallicity == '002000') {
+      return Alpha_002000;
+    } else if (metallicity == '003000') {
+      return Alpha_003000;
+    } else if (metallicity == '006000') {
+      return Alpha_006000;
     }
   }
   const DLE_StyleOps = () => {
@@ -185,6 +119,13 @@ function App() {
   const onBackClick = () => {
     setAbout(false);
   }
+  const dkElementIndiVisibilityController = () => {
+    if(!showValues && noDataLabelOpacity == '0'){
+      return '1';
+    }else{
+      return '0';
+    }
+  }
   useEffect(() => {
     setListGen(genListActual(params));
     setTimeout(() => {
@@ -211,15 +152,28 @@ function App() {
       <div onClick={toggleShowValues} className='button' id='toggleValuesButton'>{showValues ? 'Hide Values' : 'Show Values'}</div>
       <div onClick={toggleAbout} className='button' id='aboutButton'>About</div>
       <select className='selector noSelect' name='mass' onChange={onParamsChange} value={`M:${params.mass}`} id='massSelector'>
+        <option className='selectorOption noSelect' value="M:1.30">1.30</option>
         <option className='selectorOption noSelect' value="M:1.50">1.50</option>
         <option className='selectorOption noSelect' value="M:2.00">2.00</option>
+        <option className='selectorOption noSelect' value="M:2.50">2.50</option>
+        <option className='selectorOption noSelect' value="M:3.00">3.00</option>
+        <option className='selectorOption noSelect' value="M:4.00">4.00</option>
+        <option className='selectorOption noSelect' value="M:5.00">5.00</option>
         <option className='selectorOption noSelect' value="M:6.00">6.00</option>
-        <option className='selectorOption noSelect' value="M:65.00">65.00</option>
       </select>
       <select className='selector noSelect' name='metallicity' onChange={onParamsChange} value={`X:${params.metallicity}`} id='metallicity'>
         <option className='selectorOption noSelect' value="X:000020">0.000020 [α/Fe]=0.5</option>
         <option className='selectorOption noSelect' value="X:000050">0.000050 [α/Fe]=0.5</option>
         <option className='selectorOption noSelect' value="X:000100">0.000100 [α/Fe]=0.5</option>
+        <option className='selectorOption noSelect' value="X:000300">0.000300 [α/Fe]=0.5</option>
+        <option className='selectorOption noSelect' value="X:001000">0.001000</option>
+        <option className='selectorOption noSelect' value="X:002000">0.002000</option>
+        <option className='selectorOption noSelect' value="X:003000">0.003000</option>
+        <option className='selectorOption noSelect' value="X:006000">0.006000</option>
+        <option className='selectorOption noSelect' value="X:008000">0.008000</option>
+        <option className='selectorOption noSelect' value="X:010000">0.010000</option>
+        <option className='selectorOption noSelect' value="X:014000">0.014000</option>
+        <option className='selectorOption noSelect' value="X:020000">0.020000</option>
       </select>
       <select className='selector noSelect' name='irv' onChange={onParamsChange} value={`I:${params.irv}`} id='irv'>
         <option className='selectorOption noSelect' value="I:00">0</option>
@@ -237,7 +191,7 @@ function App() {
       </ul>
       <div id='noDataLabel' style={{ opacity: noDataLabelOpacity }}>__NO DATA__</div>
       <About onBackClick={onBackClick} about={about}></About>
-      <div id='dkElementIndi' style={{opacity: showValues ? '0' : '1'}}>
+      <div id='dkElementIndi' style={{ opacity: dkElementIndiVisibilityController() }}>
         <div id='cLabel'>C</div>
         <div id='biLabel'>Bi</div>
         <div id='dkElementIndiLine'></div>
