@@ -14,38 +14,13 @@ import Alpha_001000 from './data/Alpha_001000.json'
 import Alpha_002000 from './data/Alpha_002000.json'
 import Alpha_003000 from './data/Alpha_003000.json'
 import Alpha_006000 from './data/Alpha_006000.json'
+import Alpha_008000 from './data/Alpha_008000.json'
+import Alpha_010000 from './data/Alpha_010000.json'
+import Alpha_014000 from './data/Alpha_014000.json'
+import Alpha_020000 from './data/Alpha_020000.json'
 
-let len = 23
-let ins =
-`
-
-
-`
 
 const elementsActual = ['C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'I', 'Te', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi'];
-
-
-
-let xx = []
-function parseDataString(dataLen, str) {
-  let sar = str.split('\n');
-  let outArray = []
-  for (let ix = 0; ix < sar.length; ix++) {
-    if (sar[ix].length >= 1 && sar[ix].length <= 2 && elementsActual.indexOf(sar[ix]) != -1) {
-      xx.push(sar[ix])
-      let tempArray = [];
-      for (let inx = 0; inx < dataLen; inx++) {
-        tempArray.push(sar[ix + 2 + inx])
-      }
-      outArray.push(tempArray)
-    }
-  }
-  console.log(outArray)
-}
-
-
-
-parseDataString(len, ins);
 
 function App() {
   const dataSetFromMetallicity = (metallicity) => {
@@ -65,7 +40,16 @@ function App() {
       return Alpha_003000;
     } else if (metallicity == '006000') {
       return Alpha_006000;
+    } else if (metallicity == '008000') {
+      return Alpha_008000;
+    } else if (metallicity == '010000') {
+      return Alpha_010000;
+    } else if (metallicity == '014000') {
+      return Alpha_014000;
+    } else if (metallicity == '020000') {
+      return Alpha_020000;
     }
+    
   }
   const DLE_StyleOps = () => {
     if (showValues) {
